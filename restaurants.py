@@ -34,6 +34,7 @@ def readFile(filename, rlist):
 
 
 def enterNew(rlist):
+   response='y'
    name = input("Please enter the name: ")
    loc = input("location? ")
    time = input("average time to eat there? (in minutes) ")
