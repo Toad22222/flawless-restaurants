@@ -8,6 +8,7 @@ attributes = ['name', 'loc', 'time', 'price', 'dist', 'cuisine']
 pref_dict = {'name': [], 'loc': [], 'time': [], 'price': [],
             'dist': [], 'cuisine': []}
 
+#added comment here to see what happens
 
 class Restaurant(object):
    def __init__(self, name, loc, time, price, dist, cuisine):
