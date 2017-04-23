@@ -1,8 +1,6 @@
 name,loc,time,price,dist,cuisine
 chipotle,110 and Broadway,15,10,0.5,mexican
 dig inn,112 and Broadway,15,10,0.5,american farm
-le monde,112 and Broadway,45,17,0.5,frenchv and t,amsterdam 110,40,20,.4,pizza italian
-q,exit,///,,,
-,,,,,
+le monde,112 and Broadway,45,17,0.5,french
 v and t,110 and amsterdam,40,20,.4,italian pizza
 friedmans,119 and amsterdam,30,17,.3,american

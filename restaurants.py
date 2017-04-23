@@ -51,10 +51,10 @@ def enterNew(filename, rlist):
 
 
 def main():
-    a = input("What would you like to do? \n a) get suggestions\n \
-    b) add restaurants\n \
-    c) quit\n\
-               please enter a, b, c: ")
+    a = input("What would you like to do? \na) get suggestions\n \
+b) add restaurants\n \
+c) quit\n\
+please enter a, b, or c: ")
                
     while (True):
         if a is 'a':
@@ -113,10 +113,10 @@ def main():
                 print(str(restaurant))
         if a is 'c':
             break
-        a=input("What would you like to do? \n a) get suggestions\n  \
-    b) add restaurants\n \
-    c) quit\n \
-    please enter a, b, c: ")
+        a=input("What would you like to do? \na) get suggestions\n  \
+b) add restaurants\n \
+c) quit\n \
+please enter a, b, or c: ")
 
 def ask_pref(pref_int):
     pref_text = input("Enter your preference for " + attributes[pref_int] + ": ")
@@ -126,23 +126,32 @@ def ask_pref(pref_int):
 
 def find_matches(rlist, threshold):
     count = 0
+    match_list = []
     for restaurant in rlist:
         match = 0
-        if restaurant.name in pref_dict['name']:
-            match += 1
-        if restaurant.loc in pref_dict['loc']:
-            match += 1
-        if restaurant.time in pref_dict['time']:
-            match += 1
-        if restaurant.dist in pref_dict['dist']:
-            match += 1
-        if restaurant.cuisine in pref_dict['cuisine']:
-            match += 1
-        if match >= threshold:
-            print(str(restaurant))
-            count += 1
-    if count == 0:
+        if restaurant.name in pref_dict['name'] and restaurant not in match_list:
+            match_list.append(restaurant)
+        #    match += 1
+        if restaurant.loc in pref_dict['loc']and restaurant not in match_list:
+            match_list.append(restaurant)
+        #    match += 1
+        if restaurant.time in pref_dict['time']and restaurant not in match_list:
+            match_list.append(restaurant)
+         #   match += 1
+        if restaurant.dist in pref_dict['dist']and restaurant not in match_list:
+            match_list.append(restaurant)
+          #  match += 1
+        if restaurant.cuisine in pref_dict['cuisine']and restaurant not in match_list:
+            match_list.append(restaurant)
+         #   match += 1
+        #if match >= threshold:
+        #    print(str(restaurant))
+         #   count += 1
+    for res in match_list:
+        print(res)
+    if match_list ==[]:
         print("No matches found")
+        #print(match_list)
 
 
 def get_suggestions():
