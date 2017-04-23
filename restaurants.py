@@ -51,11 +51,20 @@ def enterNew(filename, rlist):
 
 
 def main():
-    a = input("What would you like to do? \na) get suggestions\n \
-b) add restaurants\n \
-c) quit\n\
-please enter a, b, or c: ")
-               
+    a = input("What would you like to do? \na) get suggestions\n\
+b) see all restaurants\n\
+c) add restaurants\n\
+d) quit\n\
+please enter a, b, c or d: ")
+    rlist = []
+    #db="rest.csv"
+    with open('rest.csv', 'r') as db:
+        reader=csv.DictReader(db)
+        for row in reader:
+            rlist.append(Restaurant(row['name'], row['loc'], \
+                                    row['time'], row['price'], \
+                                    row['dist'], row['cuisine']))
+                   
     while (True):
         if a is 'a':
             menu_text = '''What do you have a preference for?
@@ -69,12 +78,12 @@ please enter a, b, or c: ")
             add_pref = True
         
             while add_pref:
-                pref_num = input(menu_text)
+                pref_num = int(input(menu_text)) - 1
                 print("")
                 print("preferences: " + str(pref_dict))
                 print("")
                 try:
-                    pref_int = int(pref_num) - 1
+                    pref_int = int(pref_num)
                     ask_pref(pref_int)
                 except ValueError:
                     print('Sorry, please enter that again.')
@@ -89,17 +98,10 @@ please enter a, b, or c: ")
             print("")
         
             get_suggestions()
-            print('done with main :D')
-        if a is 'b':
+            #print('done with main :D')
+        elif a is 'c':
             #use = input("What would you like to do?")
-            rlist = []
-            #db="rest.csv"
-            with open('rest.csv', 'r') as db:
-                reader=csv.DictReader(db)
-                for row in reader:
-                    rlist.append(Restaurant(row['name'], row['loc'], \
-                                    row['time'], row['price'], \
-                                    row['dist'], row['cuisine']))
+            
             #readFile(db, rlist)
             print("Here is a list of your current restaurants")
             for restaurant in rlist:
@@ -107,16 +109,21 @@ please enter a, b, or c: ")
             response = input("Would you like to add more restaurants y/n ")
             if (response == 'y'):
                 enterNew('rest.csv', rlist)
-                response=input("Would you like to add more restaurants y/n ")
+                #response=input("Would you like to add more restaurants y/n ")
             print("Here is a list of your current restaurants")
             for restaurant in rlist:
                 print(str(restaurant))
-        if a is 'c':
+        elif a is 'b':
+            print("These are all your restaurants")
+            for r in rlist:
+                print(r)
+        else:
             break
-        a=input("What would you like to do? \na) get suggestions\n  \
-b) add restaurants\n \
-c) quit\n \
-please enter a, b, or c: ")
+        a=input("What would you like to do? \na) get suggestions\n\
+b) see all restaurants\n\
+c) add restaurants\n\
+d) quit\n\
+please enter a, b, c or d: ")
 
 def ask_pref(pref_int):
     pref_text = input("Enter your preference for " + attributes[pref_int] + ": ")
@@ -129,19 +136,19 @@ def find_matches(rlist, threshold):
     match_list = []
     for restaurant in rlist:
         match = 0
-        if restaurant.name in pref_dict['name'] and restaurant not in match_list:
+        if restaurant.name in pref_dict['name']:
             match_list.append(restaurant)
         #    match += 1
-        if restaurant.loc in pref_dict['loc']and restaurant not in match_list:
+        elif restaurant.loc in pref_dict['loc']:
             match_list.append(restaurant)
         #    match += 1
-        if restaurant.time in pref_dict['time']and restaurant not in match_list:
+        if restaurant.time in pref_dict['time']:
             match_list.append(restaurant)
          #   match += 1
-        if restaurant.dist in pref_dict['dist']and restaurant not in match_list:
+        if restaurant.dist in pref_dict['dist']:
             match_list.append(restaurant)
           #  match += 1
-        if restaurant.cuisine in pref_dict['cuisine']and restaurant not in match_list:
+        if restaurant.cuisine in pref_dict['cuisine']:
             match_list.append(restaurant)
          #   match += 1
         #if match >= threshold:
